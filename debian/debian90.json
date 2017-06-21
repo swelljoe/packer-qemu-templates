@@ -11,7 +11,10 @@
             "name": "debian90",
 
             "type": "qemu",
+            "qemu_binary": "/usr/libexec/qemu-kvm",
+            "net_device": "virtio-net-pci",
             "format": "qcow2",
+            "headless": true,
             "accelerator": "kvm",
             "disk_size": "{{ user `disk_size` }}",
 
