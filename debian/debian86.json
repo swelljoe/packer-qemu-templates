@@ -12,7 +12,9 @@
             "name": "debian83",
 
             "type": "qemu",
-            "format": "qcow2",
+            "qemu_binary": "qemu-kvm",
+            "format": "raw",
+            "headless": true,
             "accelerator": "kvm",
             "disk_size": "{{ user `disk_size`}}",
 

@@ -12,8 +12,10 @@
             "name": "debian79",
 
             "type": "qemu",
-            "format": "qcow2",
+            "qemu_binary": "qemu-kvm",
+            "format": "raw",
             "accelerator": "kvm",
+            "headless": true
             "disk_size": "{{ user `disk_size`}}",
 
             "iso_url": "http://cdimage.debian.org/mirror/cdimage/archive/7.9.0/amd64/iso-cd/debian-7.9.0-amd64-netinst.iso",

@@ -11,8 +11,10 @@
             "name": "debian87",
 
             "type": "qemu",
-            "format": "qcow2",
+            "qemu_binary": "qemu-kvm",
+            "format": "raw",
             "accelerator": "kvm",
+            "headless": true,
             "disk_size": "{{ user `disk_size` }}",
 
             "iso_url": "http://cdimage.debian.org/debian-cd/8.7.1/amd64/iso-cd/debian-8.7.1-amd64-netinst.iso",

@@ -13,7 +13,7 @@
             "type": "qemu",
             "qemu_binary": "qemu-kvm",
             "net_device": "virtio-net-pci",
-            "format": "qcow2",
+            "format": "raw",
             "headless": true,
             "accelerator": "kvm",
             "disk_size": "{{ user `disk_size` }}",
