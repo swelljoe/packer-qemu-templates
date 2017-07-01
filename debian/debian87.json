@@ -1,7 +1,7 @@
 {
     "variables": {
-        "user": "admindebian",
-        "password": "admindebian",
+        "user": "root",
+        "password": "minifridge",
         "disk_size": "100000",
         "domain": ""
     },
