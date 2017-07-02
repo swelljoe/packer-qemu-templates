@@ -1,6 +1,6 @@
 {
     "variables": {
-        "user": "root",
+        "user": "mfuser",
         "password": "minifridge",
         "disk_size": "100000",
         "domain": ""
