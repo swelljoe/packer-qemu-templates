@@ -4,7 +4,7 @@
 
 CLEANUP_PAUSE=${CLEANUP_PAUSE:-0}
 echo "==> Pausing for ${CLEANUP_PAUSE} seconds..."
-sleep ${CLEANUP_PAUSE}
+sleep "${CLEANUP_PAUSE}"
 
 # Unique SSH keys will be generated on first boot
 echo "==> Removing SSH server keys"
@@ -46,6 +46,22 @@ rm -f /home/vagrant/.bash_history
 # Clean up log files
 echo "==> Purging log files"
 find /var/log -type f -delete
+
+# Setup minifridge-firstboot to initialize ssh keys
+echo "==> Creating /etc/rc.local that runs on first boot"
+cat <<EOF >/etc/rc.local
+#!/bin/sh
+# First boot to initialize things that need initializing.
+# rc.local can be deleted after first successful boot (but it
+# can't safely delete itself).
+if [ -e /etc/minifridge-firstboot ]; then
+	dpkg-reconfigure --frontend=noninteractive openssh-server
+	# never need to run again
+	rm -f /etc/minifridge-firstboot
+fi
+EOF
+chmod +x /etc/rc.local
+touch /etc/minifridge-firstboot
 
 # Skipping the whiteout part from box-cutter -- which would just fill up the qcow2 image
 
