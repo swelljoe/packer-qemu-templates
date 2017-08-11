@@ -10,6 +10,9 @@ sleep "${CLEANUP_PAUSE}"
 echo "==> Removing SSH server keys"
 rm -f /etc/ssh/*_key*
 
+# SSH Config
+sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
+
 # Unique machine ID will be generated on first boot
 echo "==> Removing machine ID"
 rm -f /etc/machine-id
@@ -62,25 +65,3 @@ rm -f /home/vagrant/.bash_history
 # Clean up log files
 echo "==> Purging log files"
 find /var/log -type f -delete
-
-# Skipping the whiteout part from box-cutter -- which would just fill up the qcow2 image
-
-# # Whiteout root
-# count=$(df --sync -kP / | tail -n1  | awk -F ' ' '{print $4}')
-# let count--
-# dd if=/dev/zero of=/tmp/whitespace bs=1024 count=$count
-# rm /tmp/whitespace
-
-# # Whiteout /boot
-# count=$(df --sync -kP /boot | tail -n1 | awk -F ' ' '{print $4}')
-# let count--
-# dd if=/dev/zero of=/boot/whitespace bs=1024 count=$count
-# rm /boot/whitespace
-
-# # Zero out the free space to save space in the final image
-# dd if=/dev/zero of=/EMPTY bs=1M
-# rm -f /EMPTY
-
-# Make sure we wait until all the data is written to disk, otherwise
-# Packer might quite too early
-# sync
